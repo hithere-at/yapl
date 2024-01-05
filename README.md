@@ -12,11 +12,11 @@ The configuration file looks something like this:
   "PROGRAM_NAME": {
     "cmd": "/path/to/executable",
     "cwd": "/path/to/working/dir",
-    "env_var": ["SOME=kuru", "VAR=kuru"],
+    "env_var": {"SOME": "kuru", "VAR": "kuru"},
   }
 
   ...
 }
 ```
 
-That should give you a rough idea on how to configure `yapl`. Configuration file is saved to `$HOME/.config/yapl/yapl.json`
+That should give you a rough idea on how to configure `yapl`. Configuration file is saved to `$HOME/.config/yapl/yapl.json`.
