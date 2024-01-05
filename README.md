@@ -19,4 +19,4 @@ The configuration file looks something like this:
 }
 ```
 
-That should give you a rough idea on how to configure `yapl`. Configuration file is saved to `$HOME/.config/yapl.json`
+That should give you a rough idea on how to configure `yapl`. Configuration file is saved to `$HOME/.config/yapl/yapl.json`
