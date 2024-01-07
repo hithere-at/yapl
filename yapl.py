@@ -30,14 +30,22 @@ with open(expanduser("~/.config/yapl/yapl.json"), "r") as file:
             else:
                 term_win.addstr(x, 1, y)
 
+        # move cursor to the first line and to the end of the line
+        # the int 9 is the length of a single space indent and the string "Search: "
+        # and add 9 to the length of the search buffer
+        term_win.move(0, 9+len(search_buffer))
+
         term_win.refresh()
         char_input = term_win.getch()
         term_win.clear()
 
         ### EVENTS
-        if char_input == 8 or char_input == 127 or char_input == KEY_BACKSPACE:
+        # why isnt there a standard way to deal with backspaces
+        if char_input == 8 or char_input == 263 or char_input == 127 or char_input == KEY_BACKSPACE:
             if len(search_buffer) != 0:
                 search_buffer.pop(-1)
+
+            continue
 
         if char_input == 10 or char_input == 13 or char_input == KEY_ENTER:
             Popen(["nohup", sorted_apps[selected-2][1].get("cmd")], env=sorted_apps[selected-2][1].get("env_var"), cwd=sorted_apps[selected-2][1].get("cwd"), stdout=DEVNULL, stderr=DEVNULL)
