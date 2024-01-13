@@ -48,7 +48,9 @@ with open(expanduser("~/.config/yapl/yapl.json"), "r") as file:
             continue
 
         if char_input == 10 or char_input == 13 or char_input == KEY_ENTER:
-            Popen(["nohup", sorted_apps[selected-2][1].get("cmd")], env=sorted_apps[selected-2][1].get("env_var"), cwd=sorted_apps[selected-2][1].get("cwd"), stdout=DEVNULL, stderr=DEVNULL)
+            cmd = "nohup " + sorted_apps[selected-2][1].get("cmd")
+            cmd = cmd.split()
+            Popen(cmd, env=sorted_apps[selected-2][1].get("env_var"), cwd=sorted_apps[selected-2][1].get("cwd"), stdout=DEVNULL, stderr=DEVNULL)
             break
 
         elif char_input == KEY_UP:
