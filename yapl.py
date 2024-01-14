@@ -1,9 +1,10 @@
+import os
 from json import loads as json_loads
 from subprocess import Popen, DEVNULL
-from os.path import expanduser
 from curses import initscr, endwin, KEY_BACKSPACE, KEY_DOWN, KEY_UP, KEY_ENTER
+from shlex import split as shlex_split
 
-with open(expanduser("~/.config/yapl/yapl.json"), "r") as file:
+with open(os.path.expanduser("~/.config/yapl/yapl.json"), "r") as file:
     conf_json = json_loads(file.read())
 
     term_win = initscr()
@@ -49,8 +50,9 @@ with open(expanduser("~/.config/yapl/yapl.json"), "r") as file:
 
         if char_input == 10 or char_input == 13 or char_input == KEY_ENTER:
             cmd = "nohup " + sorted_apps[selected-2][1].get("cmd")
-            cmd = cmd.split()
-            Popen(cmd, env=sorted_apps[selected-2][1].get("env_var"), cwd=sorted_apps[selected-2][1].get("cwd"), stdout=DEVNULL, stderr=DEVNULL)
+            cmd = shlex_split(cmd)
+            env_var = sorted_apps[selected-2][1].get("env_var")
+            Popen(cmd, env={**os.environ.copy(), **env_var}, cwd=sorted_apps[selected-2][1].get("cwd"), stdout=DEVNULL, stderr=DEVNULL)
             break
 
         elif char_input == KEY_UP:
