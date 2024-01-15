@@ -51,7 +51,7 @@ with open(os.path.expanduser("~/.config/yapl/yapl.json"), "r") as file:
         if char_input == 10 or char_input == 13 or char_input == KEY_ENTER:
             cmd = "nohup " + sorted_apps[selected-2][1].get("cmd")
             cmd = shlex_split(cmd)
-            env_var = sorted_apps[selected-2][1].get("env_var")
+            env_var = sorted_apps[selected-2][1].get("env_var", {})
             Popen(cmd, env={**os.environ.copy(), **env_var}, cwd=sorted_apps[selected-2][1].get("cwd"), stdout=DEVNULL, stderr=DEVNULL)
             break
 
