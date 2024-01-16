@@ -9,13 +9,11 @@ The configuration file looks something like this:
 
 ```json
 {
-  "PROGRAM_NAME": {
-    "cmd": "/path/to/executable",
-    "cwd": "/path/to/working/dir",
-    "env_var": {"SOME": "kuru", "VAR": "kuru"},
-  }
-
-  ...
+  "programs": [
+    ["program_name", {"cmd": "/path/to/bin", "cwd": "/path/to/dir", "env_var": {"SOME": "kuru", "VAR": "kuru"}}
+    ],
+    ...
+  ]
 }
 ```
 
